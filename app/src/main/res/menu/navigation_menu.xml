@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/homeScreenFragment"
+        android:icon="@drawable/baseline_home_24"
+        android:title="Home"/>
+
+    <item android:id="@+id/cameraFragment"
+        android:icon="@drawable/baseline_add_a_photo_24"
+        android:title="Add photo"/>
+
+    <item android:id="@+id/profileFragment"
+        android:icon="@drawable/baseline_user_24"
+        android:title="Profile"/>
+
+</menu>
