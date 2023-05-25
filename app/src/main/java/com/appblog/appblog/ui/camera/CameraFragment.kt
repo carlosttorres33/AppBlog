@@ -19,6 +19,7 @@ class CameraFragment : Fragment(R.layout.fragment_camera) {
 
     private val REQUEST_IMAGE_CAPTURE = 1
     private lateinit var binding: FragmentCameraBinding
+    private var bitmap: Bitmap? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -41,7 +42,8 @@ class CameraFragment : Fragment(R.layout.fragment_camera) {
 
             val imageBitmap = data?.extras?.get("data") as Bitmap
 
-            binding.imgAddPhoto.setImageBitmap(imageBitmap)
+            binding.postImage.setImageBitmap(imageBitmap)
+            bitmap = imageBitmap
 
         }
     }

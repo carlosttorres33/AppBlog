@@ -7,12 +7,15 @@
     tools:context=".ui.camera.CameraFragment">
 
     <ImageView
-        android:id="@+id/img_add_photo"
+        android:id="@+id/post_image"
         android:layout_width="match_parent"
-        android:layout_height="250dp"/>
+        android:layout_height="250dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/baseline_add_a_photo_24"
+        android:layout_gravity="center"/>
 
     <EditText
-        android:id="@+id/etxt_photo_description"
+        android:id="@+id/etxt_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
