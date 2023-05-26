@@ -8,6 +8,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.appblog.appblog.R
 import com.appblog.appblog.core.Result
+import com.appblog.appblog.core.hide
+import com.appblog.appblog.core.show
 import com.appblog.appblog.data.remote.home.HomeScreenDataSource
 import com.appblog.appblog.databinding.FragmentHomeScreenBinding
 import com.appblog.appblog.domain.home.HomeScreenRepoImpl
@@ -33,12 +35,19 @@ class HomeScreenFragment : Fragment(R.layout.fragment_home_screen) {
         viewModel.fetchLastestPosts().observe(viewLifecycleOwner, Observer { result ->
             when (result) {
                 is Result.Loading -> {
-                    binding.progressBar.visibility = View.VISIBLE
+                    binding.progressBar.show()
                 }
 
                 is Result.Succes -> {
+                    binding.progressBar.hide()
+                    if (result.data.isEmpty()){
+                        binding.emptyContiner.show()
+                        return@Observer
+                    }else{
+                        binding.emptyContiner.hide()
+                    }
                     binding.rvHome.adapter = HomeScreenAdapter(result.data)
-                    binding.progressBar.visibility = View.GONE
+
                 }
 
                 is Result.Faliure -> {

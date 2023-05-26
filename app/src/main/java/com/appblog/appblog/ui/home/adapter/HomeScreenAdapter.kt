@@ -1,11 +1,13 @@
 package com.appblog.appblog.ui.home.adapter
 
 import android.content.Context
+import android.util.TimeUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.appblog.appblog.core.BaseViewHolder
+import com.appblog.appblog.core.TimeAgo
 import com.appblog.appblog.data.model.Post
 import com.appblog.appblog.databinding.PostItemViewBinding
 import com.bumptech.glide.Glide
@@ -39,7 +41,11 @@ class HomeScreenAdapter(private val postList: List<Post>): RecyclerView.Adapter<
             }else{
                 binding.postDescription.text = item.post_description
             }
-            binding.postTimestamp.text = "Hace 2 horas"
+
+            val createdAt = (item.created_at?.time?.div(1000L))?.let {
+                TimeAgo.getTimeAgo(it.toInt())
+            }
+            binding.postTimestamp.text = "$createdAt"
         }
     }
 
