@@ -7,7 +7,7 @@ import java.util.Date
 
 data class Post (
                  @Exclude @JvmField
-                 val id: String = "",
+                 var id: String = "",
                  @ServerTimestamp
                  var created_at: Date? = null,
                  val post_image: String ="",
@@ -15,7 +15,7 @@ data class Post (
                  val poster: Poster? = null,
                  val likes: Long = 0,
                  @Exclude @JvmField
-                 val liked: Boolean = false
+                 var liked: Boolean = false
                  )
 
 data class Poster (val username: String? = "", val uid: String? = null, val profile_picture: String = "")
