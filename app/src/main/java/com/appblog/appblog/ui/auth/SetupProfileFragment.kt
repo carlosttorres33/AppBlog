@@ -60,20 +60,22 @@ class SetupProfileFragment : Fragment(R.layout.fragment_setup_profile) {
 
             bitmap?.let {
                 if (username.isNotEmpty()){
-                    viewModel.updateUserProfile(imageBitmap = bitmap!!, username = username).observe(viewLifecycleOwner, { result ->
-                        when (result){
+                    viewModel.updateUserProfile(imageBitmap = bitmap!!, username = username).observe(viewLifecycleOwner) { result ->
+                        when (result) {
                             is Result.Loading -> {
                                 alertDialog.show()
                             }
+
                             is Result.Succes -> {
                                 alertDialog.dismiss()
                                 findNavController().navigate(R.id.action_setupProfileFragment_to_homeScreenFragment)
                             }
+
                             is Result.Faliure -> {
                                 alertDialog.dismiss()
                             }
                         }
-                    })
+                    }
                 }
             }
 

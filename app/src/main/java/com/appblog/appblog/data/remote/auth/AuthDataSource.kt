@@ -28,7 +28,7 @@ class AuthDataSource {
 
         authResult.user?.uid?.let { uid ->
             FirebaseFirestore.getInstance().collection("users").document("${uid}")
-                .set(User(email, username, "FotoUrl.png")).await()
+                .set(User(email, username)).await()
         }
 
         return authResult.user
