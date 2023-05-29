@@ -5,9 +5,14 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.appblog.appblog.core.Result
+import com.appblog.appblog.data.model.Post
 import com.appblog.appblog.domain.home.HomeScreenRepo
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.stateIn
 import java.lang.Exception
 
 class HomeScreenViewModel(private val repo: HomeScreenRepo): ViewModel() {
@@ -25,6 +30,21 @@ class HomeScreenViewModel(private val repo: HomeScreenRepo): ViewModel() {
         }
 
     }
+
+    /*/Método con StateFlow
+    val lastestPost: StateFlow<Result<List<Post>>> = flow{
+        kotlin.runCatching {
+            repo.getLatestPosts()
+        }.onSuccess { postList ->
+            emit(postList)
+        }.onFailure {
+            emit(Result.Faliure(Exception(it)))
+        }
+    }.stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(5000),
+        initialValue = Result.Loading()
+    )*/
 
     fun registerLikeButtonState(postId: String, liked : Boolean)= liveData(viewModelScope.coroutineContext + Dispatchers.Main) {
 
